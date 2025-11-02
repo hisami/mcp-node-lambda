@@ -1,5 +1,7 @@
 FROM node:20-slim AS base
 
+COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.9.0 /lambda-adapter /opt/extensions/lambda-adapter
+
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y git
