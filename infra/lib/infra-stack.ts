@@ -14,7 +14,7 @@ export class InfraStack extends cdk.Stack {
 				code: lambda.DockerImageCode.fromImageAsset("../"),
 				architecture: lambda.Architecture.ARM_64,
 				timeout: cdk.Duration.seconds(30),
-				memorySize: 256,
+				memorySize: 512,
 			},
 		);
 
