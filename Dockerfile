@@ -22,4 +22,4 @@ CMD ["node", "--loader", "ts-node/esm", "src/server.ts"]
 
 
 # docker build -t mcp-node-lambda .
-# docker run --rm -p 8080:8080 mcp-node-lambda
+# docker run -d --rm -p 8080:8080 mcp-node-lambda

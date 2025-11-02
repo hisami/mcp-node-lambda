@@ -54,6 +54,19 @@ app.post("/mcp", async (req, res) => {
 	await transport.handleRequest(req, res, req.body);
 });
 
+app.get("/mcp", async (req, res) => {
+	res.writeHead(405).end(
+		JSON.stringify({
+			jsonrpc: "2.0",
+			error: {
+				code: -32000,
+				message: "method not allowed",
+			},
+			id: null,
+		}),
+	);
+});
+
 // サーバーを起動
 server.connect(transport).then(() => {
 	app.listen(8080, () => {

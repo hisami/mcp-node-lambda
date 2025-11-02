@@ -1,16 +1,34 @@
-import * as cdk from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import * as cdk from "aws-cdk-lib";
+import * as lambda from "aws-cdk-lib/aws-lambda";
+import type { Construct } from "constructs";
 
 export class InfraStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
+	constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+		super(scope, id, props);
 
-    // The code that defines your stack goes here
+		const lambdaFunction = new lambda.DockerImageFunction(
+			this,
+			"McpNodeLambda",
+			{
+				functionName: "mcp-node-lambda",
+				code: lambda.DockerImageCode.fromImageAsset("../"),
+				architecture: lambda.Architecture.ARM_64,
+				timeout: cdk.Duration.seconds(30),
+				memorySize: 256,
+			},
+		);
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'InfraQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
-  }
+		const functionUrl = lambdaFunction.addFunctionUrl({
+			authType: lambda.FunctionUrlAuthType.NONE,
+			cors: {
+				allowedOrigins: ["*"],
+				allowedHeaders: ["*"],
+				allowedMethods: [lambda.HttpMethod.ALL],
+			},
+		});
+
+		new cdk.CfnOutput(this, "LambdaFunctionName", {
+			value: functionUrl.url,
+		});
+	}
 }
