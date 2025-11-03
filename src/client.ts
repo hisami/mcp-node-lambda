@@ -3,10 +3,7 @@ import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/
 import type { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 
 const transport = new StreamableHTTPClientTransport(
-	new URL(
-		"https://vnnwvnyb6yqz6gqtakqnqs36mm0ifcdr.lambda-url.ap-northeast-1.on.aws/mcp",
-		// "http://localhost:8080/mcp",
-	),
+	new URL("http://localhost:8080/mcp"),
 );
 
 const client = new Client({
