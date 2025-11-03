@@ -15,9 +15,7 @@ COPY tsconfig.json tsconfig.json
 COPY src ./src
 
 # サーバーが待ち受けるポート
-ENV PORT=8080
 ENV AWS_LWA_PORT=8080
-EXPOSE 8080
 
 # ts-nodeを使ってTypeScriptのまま起動
 CMD ["node", "--loader", "ts-node/esm", "src/server.ts"]
