@@ -27,7 +27,7 @@ export class InfraStack extends cdk.Stack {
 			},
 		});
 
-		new cdk.CfnOutput(this, "LambdaFunctionName", {
+		new cdk.CfnOutput(this, "LambdaFunctionUrl", {
 			value: functionUrl.url,
 		});
 	}
