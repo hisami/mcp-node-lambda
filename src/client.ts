@@ -24,7 +24,7 @@ const main = async (): Promise<void> => {
 		arguments: { weightKg: 70, heightM: 1.82 },
 	});
 
-	console.log("Weather data:", calculateResult.content);
+	console.log("BMI:", calculateResult.content);
 };
 
 main().catch((error) => {
