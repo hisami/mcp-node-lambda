@@ -14,10 +14,6 @@ const client = new Client({
 const main = async (): Promise<void> => {
 	await client.connect(transport as Transport);
 
-	// 利用可能なツールのリストを取得
-	const tools = await client.listTools();
-	console.log("Available tools:", tools);
-
 	// "calculate-bmi" ツールを呼び出す
 	const calculateResult = await client.callTool({
 		name: "calculate-bmi",
