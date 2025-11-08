@@ -20,11 +20,11 @@ const main = async (): Promise<void> => {
 
 	// "calculate" ツールを呼び出す
 	const calculateResult = await client.callTool({
-		name: "calculate",
-		arguments: { a: 10, b: 5, operation: "add" },
+		name: "calculate-bmi",
+		arguments: { weightKg: 70, heightM: 1.82 },
 	});
 
-	console.log("Calculation result:", calculateResult.content);
+	console.log("Weather data:", calculateResult.content);
 };
 
 main().catch((error) => {

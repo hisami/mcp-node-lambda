@@ -8,35 +8,27 @@ const server = new McpServer({
 	version: "1.0.0",
 });
 
-server.tool(
-	"calculate",
+server.registerTool(
+	"calculate-bmi",
 	{
-		a: z.number(),
-		b: z.number(),
-		operation: z.enum(["add", "subtract", "multiply", "divide"]),
+		title: "BMI Calculator",
+		description: "Calculate Body Mass Index",
+		inputSchema: {
+			weightKg: z.number(),
+			heightM: z.number(),
+		},
+		outputSchema: { bmi: z.number() },
 	},
-	async ({ a, b, operation }) => {
-		const result = (() => {
-			switch (operation) {
-				case "add":
-					return a + b;
-				case "subtract":
-					return a - b;
-				case "multiply":
-					return a * b;
-				case "divide":
-					if (b === 0) throw new Error("Division by zero");
-					return a / b;
-			}
-		})();
-
+	async ({ weightKg, heightM }) => {
+		const output = { bmi: weightKg / (heightM * heightM) };
 		return {
 			content: [
 				{
 					type: "text",
-					text: result.toString(),
+					text: JSON.stringify(output),
 				},
 			],
+			structuredContent: output,
 		};
 	},
 );
