@@ -18,7 +18,7 @@ const main = async (): Promise<void> => {
 	const tools = await client.listTools();
 	console.log("Available tools:", tools);
 
-	// "calculate" ツールを呼び出す
+	// "calculate-bmi" ツールを呼び出す
 	const calculateResult = await client.callTool({
 		name: "calculate-bmi",
 		arguments: { weightKg: 70, heightM: 1.82 },
